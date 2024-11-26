@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     //Public Properties
     public float speedPlayer;
+    [HideInInspector]
+    public Position playerPosition;
 
     //Private attributes
     private Animator _animatorPlayer;
@@ -33,6 +36,10 @@ public class Player : MonoBehaviour
         if (Input.GetAxis("Horizontal") < 0) _spriteRendererPlayer.flipX = true;
         if (Input.GetAxis("Horizontal") > 0) _spriteRendererPlayer.flipX = false;
 
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print("Guarrazo");
     }
 }
