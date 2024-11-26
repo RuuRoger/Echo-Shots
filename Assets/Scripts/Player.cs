@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     //Private attributes
     private Animator _animatorPlayer;
     private SpriteRenderer _spriteRendererPlayer;
+    
 
     //Methods
 
