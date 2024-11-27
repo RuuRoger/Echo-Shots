@@ -6,6 +6,10 @@ using UnityEngine.UIElements;
 
 public class Gun : MonoBehaviour
 {
+    //Public properties
+    public Transform gunBarrel;
+    public float speedBullet;
+
     //Private attributes
     private Animator _gunAnimator;
     private SpriteRenderer _gunRenderer;
@@ -53,7 +57,7 @@ public class Gun : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) Shoot();
 
     }
-    
+
     private void Shoot ()
     {
         //Make cube
@@ -61,10 +65,19 @@ public class Gun : MonoBehaviour
         //Size
         bullet.transform.localScale = new Vector2(0.1f, 0.1f);
         //Position
-        bullet.transform.position = transform.position + new Vector3 (0.6f, 0.12f,0f);
+        bullet.transform.position = gunBarrel.position;
+        //Shoot movement
+      
+        
         //color
-        _bulletRender = bullet.GetComponent<Renderer>();
-        _bulletRender.material.color = Color.green;
+        //_bulletRender = bullet.GetComponent<Renderer>();
+        //_bulletRender.material.color = Color.green;
+        
+        //Ad Rigidbody  Unity problem: Enter in conflict with boxcollider...
+        //Rigidbody2D rbBullet = bullet.AddComponent<Rigidbody2D>();
+        //Move bullet PENDIENTE
+        //bullet.transform.Translate(transform.right * Time.deltaTime * speedBullet);
+        //rbBullet.AddForce(transform.right * speedBullet, ForceMode2D.Impulse);
 
     }
 
