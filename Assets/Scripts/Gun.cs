@@ -6,13 +6,11 @@ using UnityEngine.UIElements;
 
 public class Gun : MonoBehaviour
 {
-    //public properties
-    public Camera camera;
-
     //Private attributes
     private Animator _gunAnimator;
     private SpriteRenderer _gunRenderer;
     private SpriteRenderer _playerSpriteRenderer;
+    private Renderer _bulletRender;
     private Player _player;
     //Methods
     private void Start()
@@ -50,7 +48,24 @@ public class Gun : MonoBehaviour
             transform.position = newPosition;
             _gunRenderer.flipX = false;
         }
-    }
 
+        //Shoot
+        if (Input.GetMouseButtonDown(0)) Shoot();
+
+    }
+    
+    private void Shoot ()
+    {
+        //Make cube
+        GameObject bullet = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //Size
+        bullet.transform.localScale = new Vector2(0.1f, 0.1f);
+        //Position
+        bullet.transform.position = transform.position + new Vector3 (0.6f, 0.12f,0f);
+        //color
+        _bulletRender = bullet.GetComponent<Renderer>();
+        _bulletRender.material.color = Color.green;
+
+    }
 
 }
