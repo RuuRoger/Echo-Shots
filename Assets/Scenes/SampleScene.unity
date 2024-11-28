@@ -242,8 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eabfaa45b9a819f4f8f233c1a164c396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 6042386630280783929, guid: 300e38fa97778344983164e55e69e4c3, type: 3}
   gunBarrel: {fileID: 870203910}
-  speedBullet: 2
+  speedBullet: 5
 --- !u!1 &183629316
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,15 +7,17 @@ using UnityEngine.UIElements;
 public class Gun : MonoBehaviour
 {
     //Public properties
+    public GameObject bulletPrefab;
     public Transform gunBarrel;
     public float speedBullet;
-
+    
     //Private attributes
     private Animator _gunAnimator;
     private SpriteRenderer _gunRenderer;
     private SpriteRenderer _playerSpriteRenderer;
     private Renderer _bulletRender;
     private Player _player;
+    
     //Methods
     private void Start()
     {
@@ -61,17 +63,20 @@ public class Gun : MonoBehaviour
     private void Shoot ()
     {
         //Make cube
-        GameObject bullet = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject bullet = GameObject.Instantiate(bulletPrefab,gunBarrel.position, gunBarrel.rotation);
+        bullet.GetComponent<Rigidbody2D>().AddForce(gunBarrel.right * speedBullet,ForceMode2D.Impulse);
+
+
         //Size
-        bullet.transform.localScale = new Vector2(0.1f, 0.1f);
+        //bullet.transform.localScale = new Vector2(0.1f, 0.1f);
         //Position
-        bullet.transform.position = gunBarrel.position;
+        //bullet.transform.position = gunBarrel.position;
         //Shoot movement
       
         
         //color
-        //_bulletRender = bullet.GetComponent<Renderer>();
-        //_bulletRender.material.color = Color.green;
+        _bulletRender = bullet.GetComponent<Renderer>();
+        _bulletRender.material.color = Color.green;
         
         //Ad Rigidbody  Unity problem: Enter in conflict with boxcollider...
         //Rigidbody2D rbBullet = bullet.AddComponent<Rigidbody2D>();
