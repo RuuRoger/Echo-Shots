@@ -30,33 +30,47 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        // Shoot
+        // Shoot animation
         if (Input.GetMouseButtonDown(0)) _gunAnimator.SetBool("Shoot", true);
         else _gunAnimator.SetBool("Shoot", false);
 
-        //Use mouse to move the gun (This is problem with 2d. I wanted to use LookAt but doesen't works in 2D...)
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f; //Because we are in 2d
-        Vector3 direction = mousePosition - transform.position; //This is the direction for the gun
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //transform to "º"
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
+        //Without flip
+        if (_playerSpriteRenderer.flipX == false)
+        {
+            //Use mouse to move the gun (This is problem with 2d. I wanted to use LookAt but doesen't works in 2D...)
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0f; //Because we are in 2d
+            Vector3 direction = mousePosition - transform.position; //This is the direction for the gun
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //transform to "º"
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
 
-        //Gun flip
-        if (_playerSpriteRenderer.flipX)
-        {
-            Vector3 newPosition = new Vector3(_player.transform.position.x - 0.7f, _player.transform.position.y - 0.3f, transform.position.z);
-            transform.position = newPosition;
-            _gunRenderer.flipX = true;
-        }
-        else
-        {
+            //Shoot
+            if (Input.GetMouseButtonDown(0)) Shoot();
+
+            //Gun position
             Vector3 newPosition = new Vector3(_player.transform.position.x + 0.7f, _player.transform.position.y - 0.3f, transform.position.z);
             transform.position = newPosition;
             _gunRenderer.flipX = false;
-        }
 
-        //Shoot
-        if (Input.GetMouseButtonDown(0)) Shoot();
+        }
+        //With flip
+        if (_playerSpriteRenderer.flipX)
+        {
+            //Use mouse to move the gun (This is problem with 2d. I wanted to use LookAt but doesen't works in 2D...)
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0f; //Because we are in 2d
+            Vector3 direction = (mousePosition - transform.position) * (-1); //This is the direction for the gun
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //transform to "º"
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
+
+            //Shoot
+            if (Input.GetMouseButtonDown(0)) ShootWithFlip();
+
+            //Gun position
+            Vector3 newPosition = new Vector3(_player.transform.position.x - 0.7f, _player.transform.position.y - 0.3f , transform.position.z);
+            transform.position = newPosition;
+            _gunRenderer.flipX = true;
+        }
 
     }
 
@@ -64,26 +78,15 @@ public class Gun : MonoBehaviour
     {
         //Make cube
         GameObject bullet = GameObject.Instantiate(bulletPrefab,gunBarrel.position, gunBarrel.rotation);
+        bullet.transform.position += new Vector3(0.2f, 0f, 0f);
         bullet.GetComponent<Rigidbody2D>().AddForce(gunBarrel.right * speedBullet,ForceMode2D.Impulse);
+    }
 
-
-        //Size
-        //bullet.transform.localScale = new Vector2(0.1f, 0.1f);
-        //Position
-        //bullet.transform.position = gunBarrel.position;
-        //Shoot movement
-      
-        
-        //color
-        _bulletRender = bullet.GetComponent<Renderer>();
-        _bulletRender.material.color = Color.green;
-        
-        //Ad Rigidbody  Unity problem: Enter in conflict with boxcollider...
-        //Rigidbody2D rbBullet = bullet.AddComponent<Rigidbody2D>();
-        //Move bullet PENDIENTE
-        //bullet.transform.Translate(transform.right * Time.deltaTime * speedBullet);
-        //rbBullet.AddForce(transform.right * speedBullet, ForceMode2D.Impulse);
-
+    private void ShootWithFlip()
+    {
+        GameObject bullet = GameObject.Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
+        bullet.transform.position += new Vector3( - 0.2f, 0f, 0f);
+        bullet.GetComponent<Rigidbody2D>().AddForce( - gunBarrel.right * speedBullet, ForceMode2D.Impulse);
     }
 
 }
