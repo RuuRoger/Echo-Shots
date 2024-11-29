@@ -13,10 +13,8 @@ public class Player : MonoBehaviour
     //Private attributes
     private Animator _animatorPlayer;
     private SpriteRenderer _spriteRendererPlayer;
-    
 
     //Methods
-
     private void Start()
     {
         _animatorPlayer = GetComponent<Animator>();
@@ -38,8 +36,4 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        print("Guarrazo");
-    }
 }

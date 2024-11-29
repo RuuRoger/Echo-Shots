@@ -8,6 +8,7 @@ public class Gun : MonoBehaviour
 {
     //Public properties
     public GameObject bulletPrefab;
+    public GameObject amunationPrefab;
     public Transform gunBarrel;
     public float speedBullet;
     
@@ -17,6 +18,10 @@ public class Gun : MonoBehaviour
     private SpriteRenderer _playerSpriteRenderer;
     private Renderer _bulletRender;
     private Player _player;
+    private float _bulletNumbers;
+    private float _randomX;
+    private float _randomY;
+    private bool _amunationFlag;
     
     //Methods
     private void Start()
@@ -25,13 +30,19 @@ public class Gun : MonoBehaviour
         _gunRenderer = GetComponent<SpriteRenderer>();
         _player = FindObjectOfType<Player>();
         _playerSpriteRenderer = _player.GetComponent<SpriteRenderer>();
+        _bulletNumbers = 12;
+        _amunationFlag = false;
 
     }
 
     private void Update()
     {
         // Shoot animation
-        if (Input.GetMouseButtonDown(0)) _gunAnimator.SetBool("Shoot", true);
+        if (Input.GetMouseButtonDown(0))
+        {
+            _gunAnimator.SetBool("Shoot", true);
+            _bulletNumbers--;
+        }
         else _gunAnimator.SetBool("Shoot", false);
 
         //Without flip
@@ -45,7 +56,7 @@ public class Gun : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
 
             //Shoot
-            if (Input.GetMouseButtonDown(0)) Shoot();
+            if (Input.GetMouseButtonDown(0) && _bulletNumbers >= 0) Shoot();
 
             //Gun position
             Vector3 newPosition = new Vector3(_player.transform.position.x + 0.7f, _player.transform.position.y - 0.3f, transform.position.z);
@@ -64,13 +75,20 @@ public class Gun : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
 
             //Shoot
-            if (Input.GetMouseButtonDown(0)) ShootWithFlip();
+            if (Input.GetMouseButtonDown(0) && _bulletNumbers >= 0) ShootWithFlip();
 
             //Gun position
             Vector3 newPosition = new Vector3(_player.transform.position.x - 0.7f, _player.transform.position.y - 0.3f , transform.position.z);
             transform.position = newPosition;
             _gunRenderer.flipX = true;
         }
+
+        //Show amunation
+        if (_bulletNumbers == 0 && _amunationFlag == false)
+        {
+            ShowAmunation();
+            _amunationFlag = true;
+        } 
 
     }
 
@@ -87,6 +105,20 @@ public class Gun : MonoBehaviour
         GameObject bullet = GameObject.Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
         bullet.transform.position += new Vector3( - 0.2f, 0f, 0f);
         bullet.GetComponent<Rigidbody2D>().AddForce( - gunBarrel.right * speedBullet, ForceMode2D.Impulse);
+    }
+
+    private void ShowAmunation()
+    {
+        //Create random position
+        _randomX = Random.Range(-7.5f, 7.5f);
+        _randomY = Random.Range(-3.5f, 3.5f);
+
+        //Make a new position
+        Vector3 amunationPosition = new Vector3(_randomX, _randomY, 0f);
+
+        //Instantiate
+        GameObject amunationObject = GameObject.Instantiate(amunationPrefab, amunationPosition, Quaternion.identity);
+
     }
 
 }
