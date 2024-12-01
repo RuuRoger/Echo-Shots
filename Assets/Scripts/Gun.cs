@@ -18,10 +18,11 @@ public class Gun : MonoBehaviour
     private SpriteRenderer _playerSpriteRenderer;
     private Renderer _bulletRender;
     private Player _player;
-    private float _bulletNumbers;
+    public float _bulletNumbers;
     private float _randomX;
     private float _randomY;
     private bool _amunationFlag;
+
     
     //Methods
     private void Start()
@@ -32,7 +33,6 @@ public class Gun : MonoBehaviour
         _playerSpriteRenderer = _player.GetComponent<SpriteRenderer>();
         _bulletNumbers = 12;
         _amunationFlag = false;
-
     }
 
     private void Update()
@@ -57,7 +57,7 @@ public class Gun : MonoBehaviour
 
             //Shoot
             if (Input.GetMouseButtonDown(0) && _bulletNumbers >= 0) Shoot();
-
+            
             //Gun position
             Vector3 newPosition = new Vector3(_player.transform.position.x + 0.7f, _player.transform.position.y - 0.3f, transform.position.z);
             transform.position = newPosition;
@@ -88,7 +88,11 @@ public class Gun : MonoBehaviour
         {
             ShowAmunation();
             _amunationFlag = true;
-        } 
+        }
+
+        Debug.Log("Balas: " + _bulletNumbers);
+        //"Clean Print". Only show 0 bullets in console
+        if (_bulletNumbers < 0) _bulletNumbers = 0;
 
     }
 
@@ -98,6 +102,7 @@ public class Gun : MonoBehaviour
         GameObject bullet = GameObject.Instantiate(bulletPrefab,gunBarrel.position, gunBarrel.rotation);
         bullet.transform.position += new Vector3(0.2f, 0f, 0f);
         bullet.GetComponent<Rigidbody2D>().AddForce(gunBarrel.right * speedBullet,ForceMode2D.Impulse);
+        Destroy(bullet, 5f);
     }
 
     private void ShootWithFlip()
@@ -105,6 +110,7 @@ public class Gun : MonoBehaviour
         GameObject bullet = GameObject.Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
         bullet.transform.position += new Vector3( - 0.2f, 0f, 0f);
         bullet.GetComponent<Rigidbody2D>().AddForce( - gunBarrel.right * speedBullet, ForceMode2D.Impulse);
+        Destroy(bullet, 7f);
     }
 
     private void ShowAmunation()
@@ -119,6 +125,20 @@ public class Gun : MonoBehaviour
         //Instantiate
         GameObject amunationObject = GameObject.Instantiate(amunationPrefab, amunationPosition, Quaternion.identity);
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Amunation"))
+        {
+            Debug.Log("Trigger!!"); Debug.Log("Trigger!!");
+            if (gameObject.CompareTag("PLayer"))
+            {
+                Destroy(collision.gameObject);
+                _bulletNumbers = 12;
+               
+            }
+        }
     }
 
 }
