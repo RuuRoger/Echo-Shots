@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     //Public properties
     public GameObject bulletPrefab;
     public GameObject amunationPrefab;
+    public GameObject player;
     public Transform gunBarrel;
     public float speedBullet;
     
@@ -18,7 +19,7 @@ public class Gun : MonoBehaviour
     private SpriteRenderer _playerSpriteRenderer;
     private Renderer _bulletRender;
     private Player _player;
-    public float _bulletNumbers;
+    private float _bulletNumbers;
     private float _randomX;
     private float _randomY;
     private bool _amunationFlag;
@@ -44,6 +45,9 @@ public class Gun : MonoBehaviour
             _bulletNumbers--;
         }
         else _gunAnimator.SetBool("Shoot", false);
+
+        //Enable shoot animation if player got 0 bullets    
+        if (Input.GetMouseButtonDown(0) && _bulletNumbers <=0) _gunAnimator.SetBool("Shoot", false);
 
         //Without flip
         if (_playerSpriteRenderer.flipX == false)
@@ -91,6 +95,7 @@ public class Gun : MonoBehaviour
         }
 
         Debug.Log("Balas: " + _bulletNumbers);
+        
         //"Clean Print". Only show 0 bullets in console
         if (_bulletNumbers < 0) _bulletNumbers = 0;
 
@@ -125,20 +130,6 @@ public class Gun : MonoBehaviour
         //Instantiate
         GameObject amunationObject = GameObject.Instantiate(amunationPrefab, amunationPosition, Quaternion.identity);
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("Amunation"))
-        {
-            Debug.Log("Trigger!!"); Debug.Log("Trigger!!");
-            if (gameObject.CompareTag("PLayer"))
-            {
-                Destroy(collision.gameObject);
-                _bulletNumbers = 12;
-               
-            }
-        }
     }
 
 }

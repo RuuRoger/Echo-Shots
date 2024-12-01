@@ -244,6 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 6042386630280783929, guid: 300e38fa97778344983164e55e69e4c3, type: 3}
   amunationPrefab: {fileID: 2080081868044929255, guid: ee1dd8e85993e234183139c215c9f176, type: 3}
+  player: {fileID: 183629316}
   gunBarrel: {fileID: 870203910}
   speedBullet: 5
 --- !u!1 &183629316
