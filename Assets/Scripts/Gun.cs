@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,12 +20,11 @@ public class Gun : MonoBehaviour
     private SpriteRenderer _playerSpriteRenderer;
     private Renderer _bulletRender;
     private Player _player;
-    private float _bulletNumbers;
+    private byte _bulletNumbers;
     private float _randomX;
     private float _randomY;
     private bool _amunationFlag;
 
-    
     //Methods
     private void Start()
     {
@@ -34,6 +34,8 @@ public class Gun : MonoBehaviour
         _playerSpriteRenderer = _player.GetComponent<SpriteRenderer>();
         _bulletNumbers = 12;
         _amunationFlag = false;
+
+        //Position enable with amunation
     }
 
     private void Update()
@@ -41,8 +43,11 @@ public class Gun : MonoBehaviour
         // Shoot animation
         if (Input.GetMouseButtonDown(0))
         {
-            _gunAnimator.SetBool("Shoot", true);
-            _bulletNumbers--;
+            if (_bulletNumbers > 0) 
+            {
+                _gunAnimator.SetBool("Shoot", true);
+                _bulletNumbers--;
+            }
         }
         else _gunAnimator.SetBool("Shoot", false);
 
@@ -60,7 +65,7 @@ public class Gun : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
 
             //Shoot
-            if (Input.GetMouseButtonDown(0) && _bulletNumbers >= 0) Shoot();
+            if (Input.GetMouseButtonDown(0) && _bulletNumbers > 0) Shoot();
             
             //Gun position
             Vector3 newPosition = new Vector3(_player.transform.position.x + 0.7f, _player.transform.position.y - 0.3f, transform.position.z);
@@ -79,7 +84,7 @@ public class Gun : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
 
             //Shoot
-            if (Input.GetMouseButtonDown(0) && _bulletNumbers >= 0) ShootWithFlip();
+            if (Input.GetMouseButtonDown(0) && _bulletNumbers > 0) ShootWithFlip();
 
             //Gun position
             Vector3 newPosition = new Vector3(_player.transform.position.x - 0.7f, _player.transform.position.y - 0.3f , transform.position.z);
@@ -91,13 +96,12 @@ public class Gun : MonoBehaviour
         if (_bulletNumbers == 0 && _amunationFlag == false)
         {
             ShowAmunation();
-            _amunationFlag = true;
         }
 
         Debug.Log("Balas: " + _bulletNumbers);
         
         //"Clean Print". Only show 0 bullets in console
-        if (_bulletNumbers < 0) _bulletNumbers = 0;
+        if (_bulletNumbers <=0) _bulletNumbers = 0;
 
     }
 
@@ -118,11 +122,11 @@ public class Gun : MonoBehaviour
         Destroy(bullet, 7f);
     }
 
-    private void ShowAmunation()
+    public void ShowAmunation() 
     {
         //Create random position
-        _randomX = Random.Range(-7.5f, 7.5f);
-        _randomY = Random.Range(-3.5f, 3.5f);
+        _randomX = UnityEngine.Random.Range(-7.5f, 7.5f); //Unity is confusing libraru UnityEngine with system
+        _randomY = UnityEngine.Random.Range(-3.5f, 3.5f);
 
         //Make a new position
         Vector3 amunationPosition = new Vector3(_randomX, _randomY, 0f);
@@ -130,6 +134,19 @@ public class Gun : MonoBehaviour
         //Instantiate
         GameObject amunationObject = GameObject.Instantiate(amunationPrefab, amunationPosition, Quaternion.identity);
 
+        //Make flag
+        _amunationFlag = true;
+    
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Amunation")
+        {
+            _bulletNumbers = 12;
+            Destroy(collision.gameObject);
+        }
+    }
+
 
 }
