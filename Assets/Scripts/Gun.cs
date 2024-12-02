@@ -120,7 +120,7 @@ public class Gun : MonoBehaviour
         GameObject bullet = GameObject.Instantiate(bulletPrefab,gunBarrel.position, gunBarrel.rotation);
         bullet.transform.position += new Vector3(0.2f, 0f, 0f);
         bullet.GetComponent<Rigidbody2D>().AddForce(gunBarrel.right * speedBullet,ForceMode2D.Impulse);
-        Destroy(bullet, 7f);
+        Destroy(bullet, 10f);
     }
 
     private void ShootWithFlip()
@@ -128,7 +128,7 @@ public class Gun : MonoBehaviour
         GameObject bullet = GameObject.Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
         bullet.transform.position += new Vector3( - 0.2f, 0f, 0f);
         bullet.GetComponent<Rigidbody2D>().AddForce( - gunBarrel.right * speedBullet, ForceMode2D.Impulse);
-        Destroy(bullet, 7f);
+        Destroy(bullet, 10f);
     }
 
     public void ShowAmunation() 
