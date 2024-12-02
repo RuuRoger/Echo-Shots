@@ -63,7 +63,7 @@ public class Gun : MonoBehaviour
             Vector3 direction = mousePosition - transform.position; //This is the direction for the gun
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //transform to "º"
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
-
+            
             //Shoot
             if (Input.GetMouseButtonDown(0) && _bulletNumbers > 0) Shoot();
             
@@ -82,7 +82,7 @@ public class Gun : MonoBehaviour
             Vector3 direction = (mousePosition - transform.position) * (-1); //This is the direction for the gun
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //transform to "º"
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
-
+           
             //Shoot
             if (Input.GetMouseButtonDown(0) && _bulletNumbers > 0) ShootWithFlip();
 
@@ -98,8 +98,15 @@ public class Gun : MonoBehaviour
             ShowAmunation();
         }
 
-        Debug.Log("Balas: " + _bulletNumbers);
+        //Auxiliary intermediate step to sho amunation
+        if (_bulletNumbers == 5) _amunationFlag = false;
+
         
+        //Prints
+        Debug.Log("Balas: " + _bulletNumbers);
+        Debug.Log(_amunationFlag);
+
+
         //"Clean Print". Only show 0 bullets in console
         if (_bulletNumbers <=0) _bulletNumbers = 0;
 
@@ -111,7 +118,7 @@ public class Gun : MonoBehaviour
         GameObject bullet = GameObject.Instantiate(bulletPrefab,gunBarrel.position, gunBarrel.rotation);
         bullet.transform.position += new Vector3(0.2f, 0f, 0f);
         bullet.GetComponent<Rigidbody2D>().AddForce(gunBarrel.right * speedBullet,ForceMode2D.Impulse);
-        Destroy(bullet, 5f);
+        Destroy(bullet, 7f);
     }
 
     private void ShootWithFlip()
