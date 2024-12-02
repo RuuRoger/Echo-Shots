@@ -71,6 +71,7 @@ public class Gun : MonoBehaviour
             Vector3 newPosition = new Vector3(_player.transform.position.x + 0.7f, _player.transform.position.y - 0.3f, transform.position.z);
             transform.position = newPosition;
             _gunRenderer.flipX = false;
+            gunBarrel.localPosition = new Vector3(0.407f, 0.141f, 0);
 
         }
         //With flip
@@ -90,6 +91,7 @@ public class Gun : MonoBehaviour
             Vector3 newPosition = new Vector3(_player.transform.position.x - 0.7f, _player.transform.position.y - 0.3f , transform.position.z);
             transform.position = newPosition;
             _gunRenderer.flipX = true;
+            gunBarrel.transform.localPosition = new Vector3(-0.407f, 0.141f, 0);
         }
 
         //Show amunation

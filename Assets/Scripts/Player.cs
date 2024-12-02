@@ -7,18 +7,18 @@ public class Player : MonoBehaviour
 {
     //Public Properties
     public float speedPlayer;
-    [HideInInspector]
-    public Position playerPosition;
 
     //Private attributes
     private Animator _animatorPlayer;
     private SpriteRenderer _spriteRendererPlayer;
+    private byte _livesPlayer;
 
     //Methods
     private void Start()
     {
         _animatorPlayer = GetComponent<Animator>();
         _spriteRendererPlayer = GetComponent<SpriteRenderer>();
+        _livesPlayer = 5;
     }
     private void Update()
     {
@@ -33,6 +33,18 @@ public class Player : MonoBehaviour
         //Active Flip
         if (Input.GetAxis("Horizontal") < 0) _spriteRendererPlayer.flipX = true;
         if (Input.GetAxis("Horizontal") > 0) _spriteRendererPlayer.flipX = false;
+
+        //Game Over
+        if (_livesPlayer <= 0) Time.timeScale = 0;
+
+        //UI lives
+        Debug.Log("Vidas :" + _livesPlayer);
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Green") _livesPlayer--;
 
     }
 
