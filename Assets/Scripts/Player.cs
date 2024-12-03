@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Green") _livesPlayer--;
+        if (collision.gameObject.tag == "Red") _livesPlayer -= 2;
 
     }
 
