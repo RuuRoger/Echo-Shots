@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
             Time.timeScale = 0;
         }
 
-        Debug.Log(_enemyLives);
+        Debug.Log("Vidas enemigo: " + _enemyLives);
 
     }
     private void EnemyShoots ()

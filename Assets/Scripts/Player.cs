@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     //Private attributes
     private Animator _animatorPlayer;
     private SpriteRenderer _spriteRendererPlayer;
-    private byte _livesPlayer;
+    private int _livesPlayer;
 
     //Methods
     private void Start()
