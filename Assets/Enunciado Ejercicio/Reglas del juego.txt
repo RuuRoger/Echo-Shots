@@ -1,0 +1,15 @@
+Movimiento Player:
+	Teclas asdw o flechas
+	Ratón para mover el arma
+	Click izquierdo para disparar
+
+Mecánicas y reglas:
+	Tienes 5 vidas y tu enemigo 20
+	tienes 12 balas con 10 segundos de duración en en el escenario con rebote
+	Si te da tu propia bala, pierdes 1 vida.
+	
+	Una vez terminada las balas, aparece munición aleatoriamente en el escenario
+	Para cogerla, debes usar el colider del arma, para simular que la cargas
+	EL enemigo se mueve  con patrones aleatroios en cada start
+	Dispara cada pocos segundos también, durando 5 segundos la bala
+	Si te da la bala del enemigo, pierdes 2 vidas
