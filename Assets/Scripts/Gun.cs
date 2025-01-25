@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,7 +13,9 @@ public class Gun : MonoBehaviour
     public GameObject amunationPrefab;
     public GameObject player;
     public Transform gunBarrel;
+    public TextMeshProUGUI uiBulletsCount;
     public float speedBullet;
+
     
     //Private attributes
     private Animator _gunAnimator;
@@ -40,6 +43,9 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        //UI
+        uiBulletsCount.text = _bulletNumbers.ToString();
+
         // Shoot animation
         if (Input.GetMouseButtonDown(0))
         {

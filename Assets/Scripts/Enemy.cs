@@ -10,9 +10,11 @@ public class Enemy : MonoBehaviour
     //Public properties
     public GameObject bulleetPrefabEnemy;
     public Transform enemyBullets;
+    public Transform playerTransform;
     public float speedEnemy;
     public float velocityBullet;
     public TextMeshProUGUI uiWin;
+    public TextMeshProUGUI uiEnemyLives;
 
     //private attributes
     private Vector2 _randomEnemyPosition;
@@ -27,13 +29,14 @@ public class Enemy : MonoBehaviour
     //Meethods
     private void Start()
     {
-        //Array with enemy positions to start in game
-        _randomPositions = new int[] { -1, 0, 1 };
+         //Array with enemy positions to start in game
+        _randomPositions = new int[] { -1, 1 };
 
         //Choose first direction
         _randomIndexX = Random.Range(0, _randomPositions.Length);
         _randomIndexY = Random.Range(0,_randomPositions.Length);
         _randomEnemyPosition = new Vector2(_randomPositions[_randomIndexX], _randomPositions[_randomIndexY]);
+
 
         //Movement
         GetComponent<Rigidbody2D>().AddForce(_randomEnemyPosition * speedEnemy, ForceMode2D.Impulse);
@@ -43,7 +46,7 @@ public class Enemy : MonoBehaviour
         _nextShotTime = Time.time + _shootInterval;
 
         //Enemy lives
-        _enemyLives = 20;
+        _enemyLives = 80;
 
         //UI
         uiWin.enabled = false;
@@ -52,6 +55,10 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+       
+        //UI
+        uiEnemyLives.text = _enemyLives.ToString();
+
         //Time and interval to shoot
         if (Time.time >= _nextShotTime)
         {
@@ -72,15 +79,21 @@ public class Enemy : MonoBehaviour
     }
     private void EnemyShoots ()
     {
+      
         GameObject bulletRed = GameObject.Instantiate(bulleetPrefabEnemy, enemyBullets.position, enemyBullets.rotation);
-        bulletRed.GetComponent<Rigidbody2D>().AddForce(-enemyBullets.right * velocityBullet, ForceMode2D.Impulse);
-        Destroy(bulletRed, 5f );
+        Vector3 direction = playerTransform.position - bulletRed.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calcular el ángulo en grados
+        bulletRed.transform.rotation = Quaternion.Euler(0, 0,angle);
+        Vector2 nomalizeDirection = direction.normalized;
+        bulletRed.GetComponent<Rigidbody2D>().AddForce(nomalizeDirection * velocityBullet, ForceMode2D.Impulse);
+        Destroy(bulletRed, 6f );
 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Green") _enemyLives--;
+        if (collision.gameObject.tag == "Green")
+            _enemyLives--;
     }
 
 }

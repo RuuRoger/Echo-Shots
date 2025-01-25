@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     //Public Properties
     public float speedPlayer;
     public TextMeshProUGUI uiLose;
+    public TextMeshProUGUI uiLivesPlayer;
 
     //Private attributes
     private Animator _animatorPlayer;
@@ -20,12 +21,15 @@ public class Player : MonoBehaviour
     {
         _animatorPlayer = GetComponent<Animator>();
         _spriteRendererPlayer = GetComponent<SpriteRenderer>();
-        _livesPlayer = 5;
+        _livesPlayer = 20;
         uiLose.enabled = false;
         
     }
     private void Update()
     {
+        //UI
+        uiLivesPlayer.text = _livesPlayer.ToString();
+
         //Player move
         transform.Translate(Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * speedPlayer);
         transform.Translate(Vector2.up * Input.GetAxis("Vertical") * Time.deltaTime * speedPlayer);
@@ -41,6 +45,7 @@ public class Player : MonoBehaviour
         //Game Over
         if (_livesPlayer <= 0) 
         {
+            _livesPlayer = 0;
             Time.timeScale = 0;
             uiLose.enabled=true;
         }
