@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Enemy : MonoBehaviour
     public Transform enemyBullets;
     public float speedEnemy;
     public float velocityBullet;
+    public TextMeshProUGUI uiWin;
 
     //private attributes
     private Vector2 _randomEnemyPosition;
@@ -43,6 +45,9 @@ public class Enemy : MonoBehaviour
         //Enemy lives
         _enemyLives = 20;
 
+        //UI
+        uiWin.enabled = false;
+
     }
 
     private void Update()
@@ -59,6 +64,7 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Has ganado!");
             Time.timeScale = 0;
+            uiWin.enabled = true;
         }
 
         Debug.Log("Vidas enemigo: " + _enemyLives);

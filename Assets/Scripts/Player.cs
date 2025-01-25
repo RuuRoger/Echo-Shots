@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
     //Public Properties
     public float speedPlayer;
+    public TextMeshProUGUI uiLose;
 
     //Private attributes
     private Animator _animatorPlayer;
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
         _animatorPlayer = GetComponent<Animator>();
         _spriteRendererPlayer = GetComponent<SpriteRenderer>();
         _livesPlayer = 5;
+        uiLose.enabled = false;
+        
     }
     private void Update()
     {
@@ -35,7 +39,12 @@ public class Player : MonoBehaviour
         if (Input.GetAxis("Horizontal") > 0) _spriteRendererPlayer.flipX = false;
 
         //Game Over
-        if (_livesPlayer <= 0) Time.timeScale = 0;
+        if (_livesPlayer <= 0) 
+        {
+            Time.timeScale = 0;
+            uiLose.enabled=true;
+        }
+        
 
         //UI lives
         Debug.Log("Vidas :" + _livesPlayer);
@@ -44,9 +53,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Green") _livesPlayer--;
+        if (collision.gameObject.tag == "Green")
+            _livesPlayer--;
         if (collision.gameObject.tag == "Red") _livesPlayer -= 2;
-
     }
 
 }
