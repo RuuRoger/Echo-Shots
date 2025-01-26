@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer _spriteRendererPlayer;
     private int _livesPlayer;
 
+
     //Methods
     private void Start()
     {
