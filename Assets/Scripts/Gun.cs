@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Gun : MonoBehaviour
 {
@@ -67,7 +62,7 @@ public class Gun : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0f; //Because we are in 2d
             Vector3 direction = mousePosition - transform.position; //This is the direction for the gun
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //transform to "º"
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //transform to "ï¿½"
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
             
             //Shoot
@@ -87,7 +82,7 @@ public class Gun : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0f; //Because we are in 2d
             Vector3 direction = (mousePosition - transform.position) * (-1); //This is the direction for the gun
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //transform to "º"
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //transform to "ï¿½"
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); //Now we can evite use quaternions
            
             //Shoot

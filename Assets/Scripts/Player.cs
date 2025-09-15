@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using TMPro;
 
 public class Player : MonoBehaviour
@@ -61,7 +58,8 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Green")
             _livesPlayer--;
-        if (collision.gameObject.tag == "Red") _livesPlayer -= 2;
+        if (collision.gameObject.tag == "Red")
+            _livesPlayer -= 2;
     }
 
 }

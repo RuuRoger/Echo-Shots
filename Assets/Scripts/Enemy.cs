@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
 using UnityEngine;
-using UnityEngine.UIElements;
 using TMPro;
-
 public class Enemy : MonoBehaviour
 {
     //Public properties
@@ -55,8 +50,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-       Debug.DrawLine(enemyBullets.position, playerTransform.position, Color.yellow);
-
         //UI
         uiEnemyLives.text = _enemyLives.ToString();
 
