@@ -1,11 +1,17 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
+        //Serialized fields
         [SerializeField] private float m_speedPlayer;
 
+        //Events
+        public event Action<float, float> OnPlayerInput;
+
+        //Private methods
         private void Update()
         {
             Movement();
@@ -30,6 +36,9 @@ namespace Assets.Scripts.Player
             Input.GetAxis("Vertical") *
             m_speedPlayer *
             Time.deltaTime);
+
+            OnPlayerInput?.Invoke(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         }
         
         
