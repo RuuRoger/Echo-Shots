@@ -1,5 +1,6 @@
 using UnityEngine;
 using Assets.Scripts.Gun;
+using Assets.Scripts.Prefabs;
 
 namespace Assets.Scripts.Manager
 {
@@ -26,12 +27,13 @@ namespace Assets.Scripts.Manager
 
         private void ShowAmunation()
         {
-            Debug.Log("AjAAAA");
             m_randomX = Random.Range(-7.5f, 7.5f);
             m_randomY = Random.Range(-3.5f, 3.5f);
             Vector3 amunationPosition = new Vector3(m_randomX, m_randomY, 0f);
 
             GameObject amunationObject = GameObject.Instantiate(m_amunationPrefab, amunationPosition, Quaternion.identity);
+            Amunation amunationScript = amunationObject.GetComponent<Amunation>();
+            amunationScript.OnGetAmunation += m_gun.FullAmunation;
         }
 
     }    
