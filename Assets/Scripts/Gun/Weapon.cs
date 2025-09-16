@@ -17,6 +17,7 @@ namespace Assets.Scripts.Gun
         private Animator m_gunAnimator;
         private SpriteRenderer m_gunRender;
         private byte m_bulletNumbers;
+        private bool m_emptyBullets;
 
         //Public Properties
         public byte BulletNumbers
@@ -29,6 +30,7 @@ namespace Assets.Scripts.Gun
 
         //Events
         public event Action OnNumberOfBullets;
+        public event Action OnWithoutBullets;
 
         //Private Methods
         private void Awake()
@@ -37,11 +39,13 @@ namespace Assets.Scripts.Gun
             m_gunAnimator = GetComponent<Animator>();
             m_gunRender = GetComponent<SpriteRenderer>();
             m_bulletNumbers = 12;
+            m_emptyBullets = false;
         }
 
         private void Update()
         {
             GunAnimation();
+            CallAmunationPrefab();
             Debug.Log($"tienes {m_bulletNumbers} balas");
         }
 
@@ -54,6 +58,20 @@ namespace Assets.Scripts.Gun
                     OnNumberOfBullets?.Invoke();
                     m_bulletNumbers--;
                 }
+            }
+        }
+
+        private void CallAmunationPrefab()
+        {
+            if (m_bulletNumbers <= 0 && !m_emptyBullets)
+            {
+                OnWithoutBullets?.Invoke();
+                m_emptyBullets = true;
+            }
+
+            if (m_bulletNumbers > 0)
+            {
+                m_emptyBullets = false;
             }
         }
     }
