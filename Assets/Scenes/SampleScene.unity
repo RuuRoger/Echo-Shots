@@ -306,7 +306,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 171357245}
-  - component: {fileID: 171357248}
   - component: {fileID: 171357247}
   - component: {fileID: 171357246}
   - component: {fileID: 171357249}
@@ -414,24 +413,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &171357248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171357244}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eabfaa45b9a819f4f8f233c1a164c396, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6042386630280783929, guid: 300e38fa97778344983164e55e69e4c3, type: 3}
-  amunationPrefab: {fileID: 2080081868044929255, guid: ee1dd8e85993e234183139c215c9f176, type: 3}
-  player: {fileID: 183629316}
-  gunBarrel: {fileID: 870203910}
-  uiBulletsCount: {fileID: 1762670725}
-  speedBullet: 5
 --- !u!61 &171357249
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -542,7 +523,6 @@ GameObject:
   - component: {fileID: 183629319}
   - component: {fileID: 183629323}
   - component: {fileID: 183629324}
-  - component: {fileID: 183629320}
   - component: {fileID: 183629318}
   - component: {fileID: 183629317}
   - component: {fileID: 183629321}
@@ -647,21 +627,6 @@ Transform:
   - {fileID: 171357245}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &183629320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183629316}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ec46069d48fa68499b027ccc804c3f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedPlayer: 3
-  uiLose: {fileID: 419921849}
-  uiLivesPlayer: {fileID: 726417954}
 --- !u!70 &183629321
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2437,6 +2402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1161603692}
+  - component: {fileID: 1161603693}
   m_Layer: 0
   m_Name: Walls
   m_TagString: Untagged
@@ -2463,6 +2429,19 @@ Transform:
   - {fileID: 1068202160}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1161603693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161603691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7007f593ac771ff46a93c8ec29f1c35b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_amunationPrefab: {fileID: 2080081868044929255, guid: ee1dd8e85993e234183139c215c9f176, type: 3}
 --- !u!1 &1402192973
 GameObject:
   m_ObjectHideFlags: 0
