@@ -18,6 +18,15 @@ namespace Assets.Scripts.Gun
         private SpriteRenderer m_gunRender;
         private byte m_bulletNumbers;
 
+        //Public Properties
+        public byte BulletNumbers
+        {
+            get
+            {
+                return m_bulletNumbers;
+            }
+        }
+
         //Events
         public event Action OnNumberOfBullets;
 

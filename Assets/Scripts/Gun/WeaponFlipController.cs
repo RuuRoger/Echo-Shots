@@ -12,6 +12,18 @@ namespace Assets.Scripts.Gun
         private SpriteRenderer m_gunRenderer;
         private bool m_gunIsWithFlip;
 
+        //Public Properties
+        public bool Flip
+        {
+            get
+            {
+                return m_gunIsWithFlip;
+            }
+        }
+
+        //Event
+        public event Action<int> OnFlip;
+
         private void Awake()
         {
             m_playerAnimation = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAnimation>();
@@ -56,12 +68,14 @@ namespace Assets.Scripts.Gun
             {
                 m_gunIsWithFlip = false;
                 m_gunRenderer.flipX = false;
+                OnFlip?.Invoke(value);
             }
 
             if (value == -1)
             {
                 m_gunIsWithFlip = true;
                 m_gunRenderer.flipX = true;
+                OnFlip?.Invoke(value);
             }
         }
     }
