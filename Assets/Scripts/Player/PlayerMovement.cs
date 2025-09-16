@@ -37,7 +37,7 @@ namespace Assets.Scripts.Player
             m_speedPlayer *
             Time.deltaTime);
 
-            OnPlayerInput?.Invoke(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            OnPlayerInput?.Invoke(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         }
         
