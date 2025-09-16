@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
@@ -8,6 +9,9 @@ namespace Assets.Scripts.Player
         private PlayerMovement m_playerMovement;
         private Animator m_playerAnimation;
         private SpriteRenderer m_playerSpriteRender;
+
+        //Events
+        public event Action<int> OnPlayerFlip;
 
         //Private methods
         private void Awake()
@@ -27,8 +31,17 @@ namespace Assets.Scripts.Player
             if (horizontal == 0f && vertical == 0f) m_playerAnimation.SetBool("Walk", false);
             else m_playerAnimation.SetBool("Walk", true);
 
-            if (horizontal > 0) m_playerSpriteRender.flipX = false;
-            if (horizontal < 0) m_playerSpriteRender.flipX = true;
+            if (horizontal > 0)
+            {
+                m_playerSpriteRender.flipX = false;
+                OnPlayerFlip?.Invoke(1);
+            }
+
+            if (horizontal < 0)
+            {
+                m_playerSpriteRender.flipX = true;
+                OnPlayerFlip?.Invoke(-1);
+            }
         }
     }
 }
