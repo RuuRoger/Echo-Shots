@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 using Assets.Scripts.Player;
-using System;
+using Assets.Scripts.Prefabs;
 
 namespace Assets.Scripts.Gun
 {
@@ -73,6 +74,11 @@ namespace Assets.Scripts.Gun
             {
                 m_emptyBullets = false;
             }
+        }
+
+        public void FullAmunation()
+        {
+            m_bulletNumbers = 12;
         }
     }
 }
