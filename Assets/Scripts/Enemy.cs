@@ -1,5 +1,8 @@
 using UnityEngine;
 using TMPro;
+using Assets.Scripts.Prefabs;
+using Assets.Scripts.Manager;
+using Assets.Scripts.Player;
 public class Enemy : MonoBehaviour
 {
     //Public properties
@@ -19,17 +22,24 @@ public class Enemy : MonoBehaviour
     private int _enemyLives;
     private float _nextShotTime;
     private float _shootInterval;
-    
+    private PlayerManager m_playerManager;
+
+
 
     //Meethods
+    private void Awake()
+    {
+        m_playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
+    }
+
     private void Start()
     {
-         //Array with enemy positions to start in game
+        //Array with enemy positions to start in game
         _randomPositions = new int[] { -1, 1 };
 
         //Choose first direction
         _randomIndexX = Random.Range(0, _randomPositions.Length);
-        _randomIndexY = Random.Range(0,_randomPositions.Length);
+        _randomIndexY = Random.Range(0, _randomPositions.Length);
         _randomEnemyPosition = new Vector2(_randomPositions[_randomIndexX], _randomPositions[_randomIndexY]);
 
 
@@ -68,7 +78,7 @@ public class Enemy : MonoBehaviour
             uiWin.enabled = true;
         }
 
-        Debug.Log("Vidas enemigo: " + _enemyLives);
+        // Debug.Log("Vidas enemigo: " + _enemyLives);
 
     }
     private void EnemyShoots ()
@@ -80,6 +90,13 @@ public class Enemy : MonoBehaviour
         bulletRed.transform.rotation = Quaternion.Euler(0, 0,angle);
         Vector2 nomalizeDirection = direction.normalized;
         bulletRed.GetComponent<Rigidbody2D>().AddForce(nomalizeDirection * velocityBullet, ForceMode2D.Impulse);
+
+        Bullet bulletScript = bulletRed.GetComponent<Bullet>();
+        if (bulletScript != null)
+        {
+            bulletScript.OnHitPlayer += m_playerManager.LivesHandler;
+        }
+
         Destroy(bulletRed, 6f );
 
     }
