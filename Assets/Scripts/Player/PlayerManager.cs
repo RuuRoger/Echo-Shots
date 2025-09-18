@@ -10,9 +10,15 @@ namespace Assets.Scripts.Player
 
         //Private fields
 
+        //! It's only provisional
         public void LivesHandler()
         {
             m_playerLives--;
+
+            if (m_playerLives <= 0)
+            {
+                this.gameObject.SetActive(false);
+            }
         }
     }
 }
