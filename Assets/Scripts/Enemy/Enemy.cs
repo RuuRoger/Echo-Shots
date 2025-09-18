@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using Assets.Scripts.Prefabs;
 using Assets.Scripts.Player;
+using System;
 
 namespace Assets.Scripts.Enemy
     {
@@ -38,8 +39,8 @@ namespace Assets.Scripts.Enemy
             _randomPositions = new int[] { -1, 1 };
 
             //Choose first direction
-            _randomIndexX = Random.Range(0, _randomPositions.Length);
-            _randomIndexY = Random.Range(0, _randomPositions.Length);
+            _randomIndexX = UnityEngine.Random.Range(0, _randomPositions.Length);
+            _randomIndexY = UnityEngine.Random.Range(0, _randomPositions.Length);
             _randomEnemyPosition = new Vector2(_randomPositions[_randomIndexX], _randomPositions[_randomIndexY]);
 
 
@@ -78,8 +79,7 @@ namespace Assets.Scripts.Enemy
             //     uiWin.enabled = true;
             // }
 
-            Debug.Log("Vidas enemigo: " + _enemyLives);
-
+            Die();
         }
         private void EnemyShoots()
         {
@@ -104,6 +104,15 @@ namespace Assets.Scripts.Enemy
         {
             if (collision.gameObject.tag == "Green")
                 _enemyLives--;
+        }
+
+        //! this is only  provisional
+        private void Die()
+        {
+            if (_enemyLives <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
 
     }
