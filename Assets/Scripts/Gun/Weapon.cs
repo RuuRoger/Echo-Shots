@@ -47,7 +47,6 @@ namespace Assets.Scripts.Gun
         {
             GunAnimation();
             CallAmunationPrefab();
-            Debug.Log($"tienes {m_bulletNumbers} balas");
         }
 
         private void GunAnimation()

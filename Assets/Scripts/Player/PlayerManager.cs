@@ -10,11 +10,6 @@ namespace Assets.Scripts.Player
 
         //Private fields
 
-        private void Update()
-        {
-            Debug.Log(m_playerLives);
-        }
-
         public void LivesHandler()
         {
             m_playerLives--;
