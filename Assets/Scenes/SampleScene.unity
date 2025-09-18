@@ -887,9 +887,7 @@ MonoBehaviour:
   enemyBullets: {fileID: 401651018}
   playerTransform: {fileID: 183629319}
   speedEnemy: 8
-  velocityBullet: 7.1
-  uiWin: {fileID: 726842969}
-  uiEnemyLives: {fileID: 1402192975}
+  velocityBullet: 6.5
 --- !u!61 &353978938
 BoxCollider2D:
   m_ObjectHideFlags: 0
