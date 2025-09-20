@@ -1,6 +1,7 @@
 using UnityEngine;
 using Assets.Scripts.Gun;
 using Assets.Scripts.Prefabs;
+using TMPro;
 
 namespace Assets.Scripts.Manager
 {
@@ -8,6 +9,7 @@ namespace Assets.Scripts.Manager
     {
         //Serializfields
         [SerializeField] private GameObject m_amunationPrefab;
+        [SerializeField] private TextMeshProUGUI m_amunationUI;
 
         //Private Fields
         private Weapon m_gun;
@@ -17,6 +19,11 @@ namespace Assets.Scripts.Manager
         private void Awake()
         {
             m_gun = GameObject.FindGameObjectWithTag("Gun").GetComponent<Weapon>();
+        }
+
+        void Update()
+        {
+            m_amunationUI.text = m_gun.BulletNumbers.ToString();
         }
 
         private void OnEnable()
