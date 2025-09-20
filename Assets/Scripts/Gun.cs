@@ -28,7 +28,7 @@ public class Gun : MonoBehaviour
     {
         _gunAnimator = GetComponent<Animator>();
         _gunRenderer = GetComponent<SpriteRenderer>();
-        _player = FindObjectOfType<Player>();
+        _player = FindFirstObjectByType<Player>();
         _playerSpriteRenderer = _player.GetComponent<SpriteRenderer>();
         _bulletNumbers = 12;
         _amunationFlag = false;
