@@ -2,6 +2,7 @@ using UnityEngine;
 using Assets.Scripts.Gun;
 using Assets.Scripts.Prefabs;
 using Assets.Scripts.Player;
+using Assets.Scripts.Enemy;
 using TMPro;
 
 namespace Assets.Scripts.Manager
@@ -16,6 +17,7 @@ namespace Assets.Scripts.Manager
         //Private Fields
         private Weapon m_gun;
         private PlayerManager m_player;
+        private Assets.Scripts.Enemy.Enemy m_enemy;
         private float m_randomX;
         private float m_randomY;
 
@@ -23,19 +25,20 @@ namespace Assets.Scripts.Manager
         private void Awake()
         {
             m_gun = GameObject.FindGameObjectWithTag("Gun").GetComponent<Weapon>();
+            m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
+            m_enemy = FindFirstObjectByType<Assets.Scripts.Enemy.Enemy>();
+        }
+
+        private void Start()
+        {
+            m_gun.OnWithoutBullets += ShowAmunation;
+            m_enemy.OnDestroyAllEnemyBullets += DestroyBullets;
         }
 
         void Update()
         {
-            m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
             UIHandler();
-        }
-
-        private void OnEnable()
-        {
-            m_gun.OnWithoutBullets += ShowAmunation;
-        }
-
+        } 
 
         private void ShowAmunation()
         {
@@ -57,6 +60,25 @@ namespace Assets.Scripts.Manager
         public void ForceUIUpdate()
         {
             UIHandler();
+        }
+
+        private void DestroyBullets(bool value)
+        {
+            if (value)
+            {
+                GameObject[] greenBullets = GameObject.FindGameObjectsWithTag("Green");
+                GameObject[] redBullets = GameObject.FindGameObjectsWithTag("Red");
+                                
+                foreach (GameObject bullets in greenBullets)
+                {
+                    Destroy(bullets);
+                }
+
+                foreach (GameObject bullets in redBullets)
+                {
+                    Destroy(bullets);
+                }       
+            }
         }
 
     }    

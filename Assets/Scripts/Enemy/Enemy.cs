@@ -15,9 +15,9 @@ namespace Assets.Scripts.Enemy
         public float speedEnemy;
         public float velocityBullet;
         // public TextMeshProUGUI uiWin;
-        // public TextMeshProUGUI uiEnemyLives;
+        public TextMeshProUGUI m_uiEnemyLives;
 
-        //private attributes
+        //private fields
         private Vector2 _randomEnemyPosition;
         private int[] _randomPositions;
         private int _randomIndexX;
@@ -26,6 +26,9 @@ namespace Assets.Scripts.Enemy
         private float _nextShotTime;
         private float _shootInterval;
         private PlayerManager m_playerManager;
+
+        //Events
+        public event Action<bool> OnDestroyAllEnemyBullets;
 
         //Meethods
         private void Awake()
@@ -62,7 +65,7 @@ namespace Assets.Scripts.Enemy
         private void Update()
         {
             //UI
-            // uiEnemyLives.text = _enemyLives.ToString();
+            m_uiEnemyLives.text = _enemyLives.ToString();
 
             //Time and interval to shoot
             if (Time.time >= _nextShotTime)
@@ -106,13 +109,18 @@ namespace Assets.Scripts.Enemy
                 _enemyLives--;
         }
 
-        //! this is only  provisional
         private void Die()
         {
             if (_enemyLives <= 0)
             {
-                Destroy(gameObject);
+                OnDestroyAllEnemyBullets?.Invoke(true);                
+                Invoke("DestroyEnemy", 0.1f);
             }
+        }
+
+        private void DestroyEnemy()
+        {
+            Destroy(gameObject);
         }
 
     }
