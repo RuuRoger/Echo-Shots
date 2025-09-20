@@ -1,6 +1,7 @@
 using UnityEngine;
 using Assets.Scripts.Gun;
 using Assets.Scripts.Prefabs;
+using Assets.Scripts.Player;
 using TMPro;
 
 namespace Assets.Scripts.Manager
@@ -9,13 +10,16 @@ namespace Assets.Scripts.Manager
     {
         //Serializfields
         [SerializeField] private GameObject m_amunationPrefab;
-        [SerializeField] private TextMeshProUGUI m_amunationUI;
+        [SerializeField] private TextMeshProUGUI m_amunationNumberUI;
+        [SerializeField] private TextMeshProUGUI m_playerLivesUI;
 
         //Private Fields
         private Weapon m_gun;
+        private PlayerManager m_player;
         private float m_randomX;
         private float m_randomY;
 
+        //Private Methods
         private void Awake()
         {
             m_gun = GameObject.FindGameObjectWithTag("Gun").GetComponent<Weapon>();
@@ -23,7 +27,8 @@ namespace Assets.Scripts.Manager
 
         void Update()
         {
-            m_amunationUI.text = m_gun.BulletNumbers.ToString();
+            m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
+            UIHandler();
         }
 
         private void OnEnable()
@@ -41,6 +46,17 @@ namespace Assets.Scripts.Manager
             GameObject amunationObject = GameObject.Instantiate(m_amunationPrefab, amunationPosition, Quaternion.identity);
             Amunation amunationScript = amunationObject.GetComponent<Amunation>();
             amunationScript.OnGetAmunation += m_gun.FullAmunation;
+        }
+
+        private void UIHandler()
+        {
+            m_amunationNumberUI.text = m_gun.BulletNumbers.ToString();
+            m_playerLivesUI.text = m_player.PlayerLives.ToString();
+        }
+
+        public void ForceUIUpdate()
+        {
+            UIHandler();
         }
 
     }    
