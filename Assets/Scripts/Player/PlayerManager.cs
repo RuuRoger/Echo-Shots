@@ -1,6 +1,5 @@
 using UnityEngine;
-using Assets.Scripts.Prefabs;
-
+using Assets.Scripts.Manager;
 namespace Assets.Scripts.Player
 {
     public class PlayerManager : MonoBehaviour
@@ -8,15 +7,24 @@ namespace Assets.Scripts.Player
         //Serializefields
         [SerializeField] private int m_playerLives;
 
-        //Private fields
+        //Public properties
+        public int PlayerLives
+        {
+            get
+            {
+                return m_playerLives;
+            }
+        }
 
-        //! It's only provisional
+        //Private fields
         public void LivesHandler()
         {
             m_playerLives--;
 
             if (m_playerLives <= 0)
             {
+                m_playerLives = 0;
+                FindAnyObjectByType<GameManager>().ForceUIUpdate();
                 this.gameObject.SetActive(false);
             }
         }
