@@ -10,6 +10,7 @@ TagManager:
   - Green
   - Red
   - Gun
+  - Enemy
   layers:
   - Default
   - TransparentFX
