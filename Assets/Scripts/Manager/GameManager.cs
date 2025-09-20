@@ -10,14 +10,16 @@ namespace Assets.Scripts.Manager
     public class GameManager : MonoBehaviour
     {
         //Serializfields
+        [SerializeField] private Enemy.Enemy m_enemy;
         [SerializeField] private GameObject m_amunationPrefab;
         [SerializeField] private TextMeshProUGUI m_amunationNumberUI;
         [SerializeField] private TextMeshProUGUI m_playerLivesUI;
+        [SerializeField] private TextMeshProUGUI m_winUI;
+        [SerializeField] private TextMeshProUGUI m_loseUI;
 
         //Private Fields
         private Weapon m_gun;
         private PlayerManager m_player;
-        private Assets.Scripts.Enemy.Enemy m_enemy;
         private float m_randomX;
         private float m_randomY;
 
@@ -26,19 +28,20 @@ namespace Assets.Scripts.Manager
         {
             m_gun = GameObject.FindGameObjectWithTag("Gun").GetComponent<Weapon>();
             m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
-            m_enemy = FindFirstObjectByType<Assets.Scripts.Enemy.Enemy>();
         }
 
         private void Start()
         {
             m_gun.OnWithoutBullets += ShowAmunation;
             m_enemy.OnDestroyAllEnemyBullets += DestroyBullets;
+            m_player.OnDestroyBulletsInScene += DestroyBullets;
         }
 
         void Update()
         {
             UIHandler();
-        } 
+            ShowUiText();
+        }
 
         private void ShowAmunation()
         {
@@ -68,7 +71,7 @@ namespace Assets.Scripts.Manager
             {
                 GameObject[] greenBullets = GameObject.FindGameObjectsWithTag("Green");
                 GameObject[] redBullets = GameObject.FindGameObjectsWithTag("Red");
-                                
+
                 foreach (GameObject bullets in greenBullets)
                 {
                     Destroy(bullets);
@@ -77,8 +80,37 @@ namespace Assets.Scripts.Manager
                 foreach (GameObject bullets in redBullets)
                 {
                     Destroy(bullets);
-                }       
+                }
+
+                ShowUiText();
             }
+        }
+
+        private void ShowUiText()
+        {
+            if (m_player.PlayerLives <= 0)
+            {
+                Destroy(m_player.gameObject);
+                Destroy(m_enemy.gameObject);
+                m_loseUI.gameObject.SetActive(true);
+            }
+
+            if (m_enemy.EnemyLives <= 0)
+            {
+                Destroy(m_player.gameObject);
+                Destroy(m_enemy.gameObject);
+                m_winUI.gameObject.SetActive(true);
+            }
+
+            // if (m_enemy.EnemyLives <= 0)
+            // {
+            //     foreach (GameObject obj in FindObjectsOfType<GameObject>())
+            //     {
+            //         Destroy(obj);
+            //         m_loseUI.gameObject.SetActive(true);
+            //     }
+            // }
+
         }
 
     }    

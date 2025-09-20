@@ -14,6 +14,7 @@ namespace Assets.Scripts.Enemy
         public Transform playerTransform;
         public float speedEnemy;
         public float velocityBullet;
+
         // public TextMeshProUGUI uiWin;
         public TextMeshProUGUI m_uiEnemyLives;
 
@@ -26,6 +27,15 @@ namespace Assets.Scripts.Enemy
         private float _nextShotTime;
         private float _shootInterval;
         private PlayerManager m_playerManager;
+
+        //Public properties
+        public int EnemyLives
+        {
+            get
+            {
+                return _enemyLives;
+            }
+        }
 
         //Events
         public event Action<bool> OnDestroyAllEnemyBullets;
