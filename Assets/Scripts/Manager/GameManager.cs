@@ -5,6 +5,7 @@ using Assets.Scripts.Player;
 using Assets.Scripts.Enemy;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 namespace Assets.Scripts.Manager
 {
@@ -33,6 +34,10 @@ namespace Assets.Scripts.Manager
             m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
         }
 
+        //Events
+        public event Action OnWinSong;
+        public event Action OnGameOverSong;
+
         private void Start()
         {
             m_gun.OnWithoutBullets += ShowAmunation;
@@ -48,8 +53,8 @@ namespace Assets.Scripts.Manager
 
         private void ShowAmunation()
         {
-            m_randomX = Random.Range(-7.5f, 7.5f);
-            m_randomY = Random.Range(-3.5f, 3.5f);
+            m_randomX = UnityEngine.Random.Range(-7.5f, 7.5f);
+            m_randomY = UnityEngine.Random.Range(-3.5f, 3.5f);
             Vector3 amunationPosition = new Vector3(m_randomX, m_randomY, 0f);
 
             GameObject amunationObject = GameObject.Instantiate(m_amunationPrefab, amunationPosition, Quaternion.identity);
@@ -104,6 +109,7 @@ namespace Assets.Scripts.Manager
                 Destroy(m_player.gameObject);
                 Destroy(m_enemy.gameObject);
                 m_loseUI.gameObject.SetActive(true);
+                OnGameOverSong?.Invoke();
             }
 
             if (m_enemy.EnemyLives <= 0)
@@ -113,6 +119,7 @@ namespace Assets.Scripts.Manager
                 Destroy(m_player.gameObject);
                 Destroy(m_enemy.gameObject);
                 m_winUI.gameObject.SetActive(true);
+                OnWinSong?.Invoke();
             }
         }
     }
