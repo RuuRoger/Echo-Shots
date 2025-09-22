@@ -2,7 +2,7 @@
 # Echo Shots 🔫👾
 
 <div align="center">
-   <h1><a href="https://ruuroger.itch.io/echo-shots">Play on itch.io 🎮</a></h1>
+   <h1><a href="https://ruuroger.itch.io/echo-shots">Click here to Play on itch.io 🎮</a></h1>
 </div>
 
 <p align="center">
@@ -76,7 +76,7 @@ See https://creativecommons.org/licenses/by-nc/4.0/ for more information.
 **2.0.0**
 
 ### Cambios Principales
-- Refactoriado todo el código
+- Refactorizado todo el código
 - Sonido para los disparos, música de batalla y de items.
 - Ahora la munición se coge con el 'hit' del player, no del arma.
 - Se ha ajustado la dificultad, equilbrando el valor respecto a la vida de las balas y el player dispone de más vida.
@@ -88,7 +88,7 @@ See https://creativecommons.org/licenses/by-nc/4.0/ for more information.
 - [Clonar](#clonar)
 - [Controles](#controles)
 - [Creditos](#creditos)
-- [Licencia}](#licenceia)
+- [Licencia}](#licencia)
 - [Contacto](#contacto)
 
 ---
