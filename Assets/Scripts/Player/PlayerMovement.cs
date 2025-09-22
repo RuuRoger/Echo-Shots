@@ -39,8 +39,6 @@ namespace Assets.Scripts.Player
 
             OnPlayerInput?.Invoke(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-        }
-        
-        
+        }        
     }
 }

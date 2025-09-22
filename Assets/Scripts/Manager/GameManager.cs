@@ -4,6 +4,7 @@ using Assets.Scripts.Prefabs;
 using Assets.Scripts.Player;
 using Assets.Scripts.Enemy;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Manager
 {
@@ -12,6 +13,8 @@ namespace Assets.Scripts.Manager
         //Serializfields
         [SerializeField] private Enemy.Enemy m_enemy;
         [SerializeField] private GameObject m_amunationPrefab;
+        [SerializeField] private GameObject m_panel;
+        [SerializeField] private Button m_retryButton;
         [SerializeField] private TextMeshProUGUI m_amunationNumberUI;
         [SerializeField] private TextMeshProUGUI m_playerLivesUI;
         [SerializeField] private TextMeshProUGUI m_winUI;
@@ -99,6 +102,7 @@ namespace Assets.Scripts.Manager
                 Destroy(m_player.gameObject);
                 Destroy(m_enemy.gameObject);
                 m_loseUI.gameObject.SetActive(true);
+                m_retryButton.gameObject.SetActive(true);
             }
 
             if (m_enemy.EnemyLives <= 0)
@@ -106,8 +110,8 @@ namespace Assets.Scripts.Manager
                 Destroy(m_player.gameObject);
                 Destroy(m_enemy.gameObject);
                 m_winUI.gameObject.SetActive(true);
+                m_retryButton.gameObject.SetActive(true);
             }
-
         }
     }
 }

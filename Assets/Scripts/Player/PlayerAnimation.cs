@@ -26,6 +26,11 @@ namespace Assets.Scripts.Player
             m_playerMovement.OnPlayerInput += AnimationHandler;
         }
 
+        private void OnDisable()
+        {
+            m_playerMovement.OnPlayerInput -= AnimationHandler;
+        }
+
         private void AnimationHandler(float horizontal, float vertical)
         {
             if (horizontal == 0f && vertical == 0f) m_playerAnimation.SetBool("Walk", false);

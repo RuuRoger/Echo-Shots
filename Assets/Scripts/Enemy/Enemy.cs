@@ -65,10 +65,7 @@ namespace Assets.Scripts.Enemy
             _nextShotTime = Time.time + _shootInterval;
 
             //Enemy lives
-            _enemyLives = 120;
-
-            //UI
-            // uiWin.enabled = false;
+            _enemyLives = 2;
 
         }
 
@@ -84,16 +81,9 @@ namespace Assets.Scripts.Enemy
                 _nextShotTime = Time.time + _shootInterval;
             }
 
-            //Win
-            // if (_enemyLives <= 0)
-            // {
-            //     Debug.Log("Has ganado!");
-            //     Time.timeScale = 0;
-            //     uiWin.enabled = true;
-            // }
-
             Die();
         }
+
         private void EnemyShoots()
         {
             GameObject bulletRed = GameObject.Instantiate(bulleetPrefabEnemy, enemyBullets.position, enemyBullets.rotation);
@@ -132,7 +122,6 @@ namespace Assets.Scripts.Enemy
         {
             Destroy(gameObject);
         }
-
     }
 
 }
