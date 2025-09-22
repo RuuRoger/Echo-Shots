@@ -5,15 +5,15 @@
    <h1><a href="https://ruuroger.itch.io/echo-shots">Play on itch.io 🎮</a></h1>
 </div>
 
-<div align="center">
-   ![Poster Echo Shot](Assets/Images/EchoShots.png)
-</div>
+<p align="center">
+  <img src="Assets/Images/EchoShots.png" alt="Poster Echo Shot">
+</p>
 
 ## Language / Idioma
 - [English](#english)
 - [Castellano](#castellano)
 
-## [EN] English
+## English
 
 ## Current Version
 
@@ -69,7 +69,7 @@ See https://creativecommons.org/licenses/by-nc/4.0/ for more information.
 
 ---
 
-## [CAS] Castellano
+## Castellano
 
 ## Versión Actual
 
@@ -88,7 +88,7 @@ See https://creativecommons.org/licenses/by-nc/4.0/ for more information.
 - [Clonar](#clonar)
 - [Controles](#controles)
 - [Creditos](#creditos)
-- [Licencia}](#licenceia
+- [Licencia}](#licenceia)
 - [Contacto](#contacto)
 
 ---
