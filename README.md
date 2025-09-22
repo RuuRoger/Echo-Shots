@@ -93,7 +93,7 @@ See https://creativecommons.org/licenses/by-nc/4.0/ for more information.
 
 ---
 
-## Description
+## Descripción
 
 En Echo Shots, cada bala cuenta. Equipado con tu arma y 12 balas, deberás derrotar a tu enemigo, esquivando cada bala hacia a tí (¡incluida las tuyas!).
 Demuestra tus reflejos y tu estrategia para ganar.
@@ -116,11 +116,11 @@ git clone https://github.com/RuuRoger/Echo-Shots.git
 - Desarrollador Gamplay: RuuRoger
 - Pixel Art: RuuRoger
 
-## Licence
+## Licencia
 
 Este proyecto está licenciado bajo la Licencia **Creative Commons Atribución-NoComercial 4.0 Internacional (CC BY-NC 4.0)**.
 
 Para más información:  https://creativecommons.org/licenses/by-nc/4.0/ 
 
-## Contact
+## Contacto
 - Email: **lozanofierroruu@gmail.com**
