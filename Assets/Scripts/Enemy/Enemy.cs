@@ -39,6 +39,7 @@ namespace Assets.Scripts.Enemy
 
         //Events
         public event Action<bool> OnDestroyAllEnemyBullets;
+        public event Action onEnemyShoot;
 
         //Meethods
         private void Awake()
@@ -98,6 +99,9 @@ namespace Assets.Scripts.Enemy
             {
                 bulletScript.OnHitPlayer += m_playerManager.LivesHandler;
             }
+
+            onEnemyShoot?.Invoke();
+            
 
             Destroy(bulletRed, 6f);
 
