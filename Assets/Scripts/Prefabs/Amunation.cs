@@ -12,7 +12,7 @@ namespace Assets.Scripts.Prefabs
             if (collision.CompareTag("Player"))
             {
                 OnGetAmunation?.Invoke();
-                Destroy(gameObject);
+                Destroy(gameObject, 0.2f);
             }
         }
     }
