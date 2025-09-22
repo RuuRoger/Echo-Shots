@@ -5,15 +5,15 @@
    <h1><a href="https://ruuroger.itch.io/echo-shots">Play on itch.io 🎮</a></h1>
 </div>
 
-
-![Poster Echo Shot](Assets/Images/EchoShots.png)
+<div align="center">
+   ![Poster Echo Shot](Assets/Images/EchoShots.png)
+</div>
 
 ## Language / Idioma
 - [English](#english)
 - [Castellano](#castellano)
 
 ## [EN] English
-## [CAS] Castellano
 
 ## Current Version
 
@@ -38,9 +38,6 @@
 ---
 
 ## Description
-
-En Echo Shots, cada bala cuenta. Equipado con tu arma y 12 balas, deberás derrotar a tu enemigo, esquivando cada bala hacia a tí (¡incluida las tuyas!).
-Demuestra tus reflejos y tu estrategia para ganar.
 
 In Echo Shots, every bullet counts. Armed with your weapon and 12 bullets, you must defeat your enemy while dodging every bullet coming your way (including your own!).
 Show your reflexes and strategy to win.
