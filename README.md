@@ -6,30 +6,124 @@
 </div>
 
 
+![Poster Echo Shot](Assets/Images/EchoShots.png)
 
-A little videogame where 12 bullets are your allies to face your enemy. Get extra ammo, but be careful with the ricochets, or they will work against you.
+## Language / Idioma
+- [English](#english)
+- [Castellano](#castellano)
 
-![Videogame](Echo_shots.gif)
+## [EN] English
+## [CAS] Castellano
 
-## 🏆 About the Game
+## Current Version
 
-You'll need to defeat your enemy with your 12-round chamber pistol. Don't worry, when you run out of bullets, you'll be able to get more ammo, but watch out, because you'll be exposed! Bullets ricochet, and there's friendly fire... from yourself. So, if you love a challenge and testing your reflexes, **this game is for you**.
+**2.0.0**
 
-🎯 **Goal**: Win to Survive.
+### Main Changes
+- Complete code refactor.
+- In-game sound: background music, shooting effects, and item sounds.
+- Now, ammunition is collected by the player’s hit, not by the gun.
+- Difficulty adjusted: all bullets now reduce the same amount of health, and the player has more lives
 
-## 🎮 Main Features
+---
 
-- 💥 Fast-Paced Combat  
-- ⚡ Reflex-Testing Gameplay  
-- ✨ Highly Addictive 
+## Table of Contents
+- [Description](#description)
+- [Download](#download)
+- [Controls](#controls)
+- [Credits](#credits)
+- [Licence}](#licence)
+- [Contact](#contact)
 
-## ⚙️ Technologies Used
-🎮 Unity (Game engine)
+---
 
-🛠 Unity version: 2022.3.47f1
+## Description
 
-💻 C#
+En Echo Shots, cada bala cuenta. Equipado con tu arma y 12 balas, deberás derrotar a tu enemigo, esquivando cada bala hacia a tí (¡incluida las tuyas!).
+Demuestra tus reflejos y tu estrategia para ganar.
 
-🖥 Visual Studio / VS Code
+In Echo Shots, every bullet counts. Armed with your weapon and 12 bullets, you must defeat your enemy while dodging every bullet coming your way (including your own!).
+Show your reflexes and strategy to win.
 
-🎨 Pixel Art Editor: LibreSprite
+## Download
+
+Clone the repository with:
+
+```bash
+git clone https://github.com/RuuRoger/Echo-Shots.git
+```
+
+## Controls
+- Movement: AWSD or Arrows
+- Shoot: Left mouse click
+
+## Credits
+- Gameplay developer: RuuRoger
+- Pixel Art: RuuRoger
+
+## Licence
+
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) License.
+
+See https://creativecommons.org/licenses/by-nc/4.0/ for more information.
+
+## Contact
+- Email: **lozanofierroruu@gmail.com**
+
+---
+
+## [CAS] Castellano
+
+## Versión Actual
+
+**2.0.0**
+
+### Cambios Principales
+- Refactoriado todo el código
+- Sonido para los disparos, música de batalla y de items.
+- Ahora la munición se coge con el 'hit' del player, no del arma.
+- Se ha ajustado la dificultad, equilbrando el valor respecto a la vida de las balas y el player dispone de más vida.
+
+---
+
+## Tabla de Contenidos
+- [Descripción](#descripcion)
+- [Clonar](#clonar)
+- [Controles](#controles)
+- [Creditos](#creditos)
+- [Licencia}](#licenceia
+- [Contacto](#contacto)
+
+---
+
+## Description
+
+En Echo Shots, cada bala cuenta. Equipado con tu arma y 12 balas, deberás derrotar a tu enemigo, esquivando cada bala hacia a tí (¡incluida las tuyas!).
+Demuestra tus reflejos y tu estrategia para ganar.
+
+---
+
+## Clonar
+
+Clona el repositorio con:
+
+```bash
+git clone https://github.com/RuuRoger/Echo-Shots.git
+```
+
+## Controles
+- Movimiento: AWSD o flechas
+- Disparo: Botón izquierdo del botón
+
+## Creditos
+- Desarrollador Gamplay: RuuRoger
+- Pixel Art: RuuRoger
+
+## Licence
+
+Este proyecto está licenciado bajo la Licencia **Creative Commons Atribución-NoComercial 4.0 Internacional (CC BY-NC 4.0)**.
+
+Para más información:  https://creativecommons.org/licenses/by-nc/4.0/ 
+
+## Contact
+- Email: **lozanofierroruu@gmail.com**
