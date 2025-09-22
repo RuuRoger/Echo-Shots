@@ -88,6 +88,12 @@ namespace Assets.Scripts.Manager
 
         private void ShowUiText()
         {
+            //Avoid displaying errors in console
+            if (m_player == null || m_enemy == null)
+            {
+                return;
+            }
+
             if (m_player.PlayerLives <= 0)
             {
                 Destroy(m_player.gameObject);
@@ -102,16 +108,6 @@ namespace Assets.Scripts.Manager
                 m_winUI.gameObject.SetActive(true);
             }
 
-            // if (m_enemy.EnemyLives <= 0)
-            // {
-            //     foreach (GameObject obj in FindObjectsOfType<GameObject>())
-            //     {
-            //         Destroy(obj);
-            //         m_loseUI.gameObject.SetActive(true);
-            //     }
-            // }
-
         }
-
-    }    
+    }
 }
