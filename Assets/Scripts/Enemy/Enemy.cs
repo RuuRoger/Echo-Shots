@@ -19,13 +19,13 @@ namespace Assets.Scripts.Enemy
         public TextMeshProUGUI m_uiEnemyLives;
 
         //private fields
-        private Vector2 _randomEnemyPosition;
-        private int[] _randomPositions;
-        private int _randomIndexX;
-        private int _randomIndexY;
-        private int _enemyLives;
-        private float _nextShotTime;
-        private float _shootInterval;
+        private Vector2 m_randomEnemyPosition;
+        private int[] m_randomPositions;
+        private int m_randomIndexX;
+        private int m_randomIndexY;
+        private int m_enemyLives;
+        private float m_nextShotTime;
+        private float m_shootInterval;
         private PlayerManager m_playerManager;
 
         //Public properties
@@ -33,7 +33,7 @@ namespace Assets.Scripts.Enemy
         {
             get
             {
-                return _enemyLives;
+                return m_enemyLives;
             }
         }
 
@@ -49,36 +49,36 @@ namespace Assets.Scripts.Enemy
         private void Start()
         {
             //Array with enemy positions to start in game
-            _randomPositions = new int[] { -1, 1 };
+            m_randomPositions = new int[] { -1, 1 };
 
             //Choose first direction
-            _randomIndexX = UnityEngine.Random.Range(0, _randomPositions.Length);
-            _randomIndexY = UnityEngine.Random.Range(0, _randomPositions.Length);
-            _randomEnemyPosition = new Vector2(_randomPositions[_randomIndexX], _randomPositions[_randomIndexY]);
+            m_randomIndexX = UnityEngine.Random.Range(0, m_randomPositions.Length);
+            m_randomIndexY = UnityEngine.Random.Range(0, m_randomPositions.Length);
+            m_randomEnemyPosition = new Vector2(m_randomPositions[m_randomIndexX], m_randomPositions[m_randomIndexY]);
 
 
             //Movement
-            GetComponent<Rigidbody2D>().AddForce(_randomEnemyPosition * speedEnemy, ForceMode2D.Impulse);
+            GetComponent<Rigidbody2D>().AddForce(m_randomEnemyPosition * speedEnemy, ForceMode2D.Impulse);
 
             //Time and interval to shoot
-            _shootInterval = 3f;
-            _nextShotTime = Time.time + _shootInterval;
+            m_shootInterval = 3f;
+            m_nextShotTime = Time.time + m_shootInterval;
 
             //Enemy lives
-            _enemyLives = 2;
+            m_enemyLives = 120;
 
         }
 
         private void Update()
         {
             //UI
-            m_uiEnemyLives.text = _enemyLives.ToString();
+            m_uiEnemyLives.text = m_enemyLives.ToString();
 
             //Time and interval to shoot
-            if (Time.time >= _nextShotTime)
+            if (Time.time >= m_nextShotTime)
             {
                 EnemyShoots();
-                _nextShotTime = Time.time + _shootInterval;
+                m_nextShotTime = Time.time + m_shootInterval;
             }
 
             Die();
@@ -106,12 +106,12 @@ namespace Assets.Scripts.Enemy
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.tag == "Green")
-                _enemyLives--;
+                m_enemyLives--;
         }
 
         private void Die()
         {
-            if (_enemyLives <= 0)
+            if (m_enemyLives <= 0)
             {
                 OnDestroyAllEnemyBullets?.Invoke(true);                
                 Invoke("DestroyEnemy", 0.1f);
