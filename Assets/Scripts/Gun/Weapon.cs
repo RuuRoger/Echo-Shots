@@ -32,6 +32,7 @@ namespace Assets.Scripts.Gun
         //Events
         public event Action OnNumberOfBullets;
         public event Action OnWithoutBullets;
+        public event Action OnShoot;
 
         //Private Methods
         private void Awake()
@@ -57,6 +58,7 @@ namespace Assets.Scripts.Gun
                 {
                     OnNumberOfBullets?.Invoke();
                     m_bulletNumbers--;
+                    OnShoot?.Invoke();
                 }
             }
         }
