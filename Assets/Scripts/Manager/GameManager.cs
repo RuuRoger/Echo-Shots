@@ -13,8 +13,8 @@ namespace Assets.Scripts.Manager
         //Serializfields
         [SerializeField] private Enemy.Enemy m_enemy;
         [SerializeField] private GameObject m_amunationPrefab;
-        [SerializeField] private GameObject m_panel;
         [SerializeField] private Button m_retryButton;
+        [SerializeField] private Button m_exitButton;
         [SerializeField] private TextMeshProUGUI m_amunationNumberUI;
         [SerializeField] private TextMeshProUGUI m_playerLivesUI;
         [SerializeField] private TextMeshProUGUI m_winUI;
@@ -99,18 +99,20 @@ namespace Assets.Scripts.Manager
 
             if (m_player.PlayerLives <= 0)
             {
+                m_retryButton.gameObject.SetActive(true);
+                m_exitButton.gameObject.SetActive(true);
                 Destroy(m_player.gameObject);
                 Destroy(m_enemy.gameObject);
                 m_loseUI.gameObject.SetActive(true);
-                m_retryButton.gameObject.SetActive(true);
             }
 
             if (m_enemy.EnemyLives <= 0)
             {
+                m_retryButton.gameObject.SetActive(true);
+                m_exitButton.gameObject.SetActive(true);
                 Destroy(m_player.gameObject);
                 Destroy(m_enemy.gameObject);
                 m_winUI.gameObject.SetActive(true);
-                m_retryButton.gameObject.SetActive(true);
             }
         }
     }
